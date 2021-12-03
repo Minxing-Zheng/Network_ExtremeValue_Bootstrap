@@ -1,0 +1,19 @@
+universe = vanilla
+
+log = /home/mzheng54/maxlog/job_$(Cluster)_$(Process).log
+error = /home/mzheng54/maxlog/job_$(Cluster)_$(Process).err
+output = /home/mzheng54/maxlog/job_$(Cluster)_$(Process).out
+
+executable = MaxD_sub.sh
+arguments = $(n) $(fun) $(ifA) $(ifsub) $(subsize)
+
+should_transfer_files = YES
+when_to_transfer_output = ON_EXIT
+
+transfer_input_files = http://proxy.chtc.wisc.edu/SQUID/chtc/python38.tar.gz,/home/mzheng54/packages.tar.gz,MaxD_sub.py,MaxD_params_sub.txt
+
+request_cpus = 1
+request_memory = 1GB
+request_disk = 1GB
+#ntrial = 12
+queue 1 n,fun,ifA ifsub subsize from MaxD_params_sub.txt
